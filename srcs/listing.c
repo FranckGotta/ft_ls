@@ -76,28 +76,3 @@ t_arg		*ft_list_arg(t_flags *flg, t_arg *parse_arg)
 	return (parse_arg);
 }
 
-int			ft_ls(t_flags *flg)
-{
-	int i;
-	t_arg	*parse_arg;
-	t_arg	*begin_lst;
-//	t_arg	*debut;
-	
-//	begin_lst = parse_arg;
-	i = 1;
-	if (flg->ac >= 2)
-	{
-		parse_arg = ft_init_arg();
-		begin_lst = ft_list_arg(flg, parse_arg);
-			// printf("%s\n", parse_arg->next->str);
-	}
-	begin_lst = go_begin(begin_lst);
-	/*while (begin_lst->next)
-	{
-		printf("[%s]\n", begin_lst->str);
-		begin_lst = begin_lst->next;
-	}*/
-	//printf("%s\n", begin_lst->str);
-	ft_checkflags(flg, begin_lst);
-	return (0);
-}

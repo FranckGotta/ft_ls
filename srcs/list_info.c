@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   list_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frgotta <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 11:30:46 by frgotta           #+#    #+#             */
-/*   Updated: 2017/11/09 10:55:24 by frgotta          ###   ########.fr       */
+/*   Created: 2018/05/22 14:32:19 by frgotta           #+#    #+#             */
+/*   Updated: 2018/05/22 14:32:21 by frgotta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ft_ls.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+
+
+int		ft_manage_info(char *str, t_flags *flg)
 {
-	unsigned char	*s1;
-	unsigned char	*s2;
-	size_t			i;
+	struct stat *s;
 
-	s1 = (unsigned char *)dst;
-	s2 = (unsigned char *)src;
-	i = 0;
-	if (s1 > s2)
+	if (stat(str, s) != 0)
 	{
-		while (len--)
-			*(s1 + len) = *(s2 + len);
-	}
-	else
-	{
-		while (i < len)
-		{
-			*(s1 + i) = *(s2 + i);
-			i++;
-		}
-	}
-	return (dst);
+		write(2, "ls :", 4);
+        write(2, str, ft_strlen(str));
+        write(2, ": ", 2);
+        perror("");
+		exit(-1);
+    }
+    else
+        ft_get_info(str, flg);
+	return (0);
 }

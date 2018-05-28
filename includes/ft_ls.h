@@ -22,6 +22,8 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <grp.h>
+#include <uuid/uuid.h>
 #include "../libft/libft.h"
 
 void	ft_putstr(char const *str);
@@ -60,6 +62,12 @@ typedef struct		s_flags
 	char	*name;
 }					t_flags;
 
+typedef struct		s_info
+{
+	char	*name;
+	char	chmod[10];
+}
+
 /*typedef struct		s_info
 {
 	
@@ -71,7 +79,7 @@ t_arg		*ft_list_arg(t_flags *flg, t_arg *parse_arg);
 t_flags		*init_flags(void);
 int			ft_check_opt(char *str);
 int			ft_if_match(t_flags *flg, char *str);
-int			ft_if_exist(char *str, t_flags *flg);
+int			ft_manage_info(char *str, t_flags *flg);
 //t_list	*ft_lstnew(const void *content, size_t content_size);
 
 #endif

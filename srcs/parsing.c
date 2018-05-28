@@ -12,37 +12,21 @@
 
 #include "ft_ls.h"
 
-int		ft_if_exist(char *str, t_flags *flg)
+int		ft_manage_info(char *str, t_flags *flg)
 {
-	DIR		*doc;
 	struct stat *s;
 
-	//stat(str, s);
-	doc = opendir(str);
-/*	if (doc == NULL)
+	if (stat(str, s) != 0)
 	{
 		ft_putstr("ls :");
 		ft_putstr(str);
 		ft_putstr(": ");
-		perror("");
-		exit(-1);
-	}*/
-	if (/*!S_ISREG(s->st_mode) || */doc == NULL)
-	{
-		ft_putstr("ls :");
-		ft_putstr(str);
-		ft_putstr(": ");
-		perror("");
+		ft_putendl("No such file or directory");
 		exit(-1);
 	}
-	else
-	{
-		flg->name = strdup(str);
-		ft_putendl(flg->name);
-	}
-	closedir(doc);
 	return (0);
 }
+
 int		ft_if_match(t_flags *flg, char *str)
 {
 	int		i;
@@ -103,10 +87,10 @@ void		ft_checkflags(t_flags *flg, t_arg *begin_lst)
 		{
 			begin_lst = begin_lst->next;
 			//printf("%s\n", begin_lst->str);
-			ft_if_exist(begin_lst->str, flg);
+			ft_manage_info(begin_lst->str);
 		}
 		else
-			ft_if_exist(begin_lst->str, flg);
+			ft_manage_info(begin_lst->str);
 		begin_lst = begin_lst->next;
 	}
 	//printf("[%s]\n", begin_lst->next-> str);
